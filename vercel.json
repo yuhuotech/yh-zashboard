@@ -3,7 +3,7 @@
   "buildCommand": "echo 'Skipping build - using pre-built dist'",
   "outputDirectory": "dist",
   "public": true,
-  "env": [],
+  "env": {},
   "headers": [
     {
       "source": "/(.*)",
