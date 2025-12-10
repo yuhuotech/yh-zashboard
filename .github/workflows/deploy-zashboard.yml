@@ -17,9 +17,8 @@ jobs:
 
       - name: Download latest zashboard release
         run: |
-          mkdir -p dist
           wget -q https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip -O dist.zip
-          unzip -o dist.zip -d dist/
+          unzip -o dist.zip
           rm dist.zip
 
       - name: Setup Node.js
