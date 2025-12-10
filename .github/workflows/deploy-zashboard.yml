@@ -17,9 +17,17 @@ jobs:
 
       - name: Download latest zashboard release
         run: |
+          mkdir -p temp
           wget -q https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip -O dist.zip
-          unzip -o dist.zip
+          unzip -o dist.zip -d temp/
           rm dist.zip
+          # 将所有文件移到根目录（如果是单个 dist 文件夹，则取出其内容）
+          if [ -d "temp/dist" ]; then
+            mv temp/dist/* .
+          else
+            mv temp/* .
+          fi
+          rm -rf temp
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
