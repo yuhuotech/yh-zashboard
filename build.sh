@@ -6,7 +6,7 @@ mkdir -p temp
 
 # 下载最新的 zashboard 发布版本
 echo "Downloading latest zashboard release..."
-wget -q https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip -O dist.zip
+curl -L -o dist.zip https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
 
 # 解压到临时目录
 echo "Extracting files..."
