@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "buildCommand": "echo 'Skipping build - using pre-built dist'",
+  "outputDirectory": "dist",
+  "public": true,
+  "env": [],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        }
+      ]
+    }
+  ]
+}

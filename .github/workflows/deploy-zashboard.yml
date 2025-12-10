@@ -1,0 +1,46 @@
+name: Deploy Zashboard to Vercel
+
+on:
+  schedule:
+    # 每天 UTC 时间 00:00 运行（可根据需要调整）
+    - cron: '0 0 * * *'
+  # 允许手动触发
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download latest zashboard release
+        run: |
+          mkdir -p dist
+          wget -q https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip -O dist.zip
+          unzip -o dist.zip -d dist/
+          rm dist.zip
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel deploy --prod --token $VERCEL_TOKEN
+
+      - name: Commit changes (if any)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dist/
+          git commit -m "chore: update zashboard from upstream release" || true
+          git push || true

@@ -1,0 +1,11 @@
+{
+  "name": "yh-zashboard",
+  "version": "1.0.0",
+  "description": "Personal zashboard deployment",
+  "scripts": {
+    "deploy": "vercel deploy --prod"
+  },
+  "keywords": ["zashboard"],
+  "author": "",
+  "license": "MIT"
+}
