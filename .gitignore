@@ -1,6 +1,6 @@
-dist/
 node_modules/
 *.zip
 .DS_Store
 .env.local
 .vercel/
+temp/
